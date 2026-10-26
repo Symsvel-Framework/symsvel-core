@@ -19,7 +19,8 @@ jobs:
           coverage: none
           tools: composer:v2
       - run: composer install --no-interaction --prefer-dist --no-progress
-      - run: composer qa
+      - run: composer validate --no-check-publish
+      - run: php vendor/bin/phpunit
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
