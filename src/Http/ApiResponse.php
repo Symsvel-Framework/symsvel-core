@@ -19,7 +19,7 @@ final class ApiResponse
 
     public static function noContent(): JsonResponse
     {
-        return new JsonResponse(null, 204);
+        return new JsonResponse('', 204, [], true);
     }
 
     /** @param array<string, string> $violations */
