@@ -8,13 +8,14 @@ on:
 
 jobs:
   qa:
-    runs-on: ubuntu-24.04
+    runs-on: [self-hosted, linux, ARM64, symsvel]
     steps:
       - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          tools: composer:v2
+      - name: Verify preinstalled PHP and Composer
+        run: |
+          php -v
+          composer --version
+          php -r 'if (PHP_VERSION_ID < 80400 || PHP_VERSION_ID >= 80500) { fwrite(STDERR, "PHP 8.4 required\n"); exit(1); }'
       - name: Validate Composer manifest
         run: composer validate --no-check-publish --no-check-lock
       - name: Install dependencies
