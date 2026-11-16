@@ -9,3 +9,7 @@ Les jobs utilisent les runners auto-hébergés configurés dans le workflow. Une
 ### Visibilité des tests ignorés
 
 La CI affiche les raisons des tests PHPUnit ignorés avec `--display-skipped` (directement ou via le script Composer QA). Un test ignoré ne devient pas bloquant pour autant : les motifs sont examinés pour distinguer prérequis absents et couverture manquante.
+
+## Release sur runners auto-hébergés (16/11/2026)
+
+Le workflow de tags `vX.Y.Z` utilise les labels CI existants `[self-hosted, linux, ARM64, symsvel]`, avec PHP 8.4 et Composer préinstallés. La publication reste une GitHub Release du tag vérifié via `actions/github-script@v7`, sans dépendance à l'exécutable `gh`. Aucun tag n'est créé par cette modification, l'autorisation `contents: write` demeure nécessaire. CI et création de release de validation restent requises ; un runner doit être en ligne et la plateforme autoriser l'exécution auto-hébergée.
