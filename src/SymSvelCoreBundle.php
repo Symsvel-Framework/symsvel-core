@@ -13,7 +13,10 @@ final class SymSvelCoreBundle extends AbstractBundle
 {
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
+        // Back imports Symfony's built-in `routing.controllers` resource.
+        // Expose Core's liveness action through that native service tag.
         $builder->register(HealthController::class, HealthController::class)
-            ->addTag('controller.service_arguments');
+            ->addTag('controller.service_arguments')
+            ->addTag('routing.controller');
     }
 }

@@ -29,13 +29,19 @@ le routeur Symfony a pu exécuter cette action ; il ne garantit pas la
 disponibilité des autres services (readiness à traiter séparément).
 
 Le contrôleur et son service sont propres au Core et ne créent pas de
-nouveau module. **Intégration requise côté Back :** importer les
-attributs depuis `vendor/symsvel-framework/core/src/Controller/` après
-publication / mise à jour de Core, sans réintroduire de registre généré.
-Les tests Core portent sur le contrat JSON et la route ; l'activation réelle
-et les tests HTTP dans Back doivent suivre la disponibilité de cette version
-dans le package Composer du projet. Pas de changement automatique du
-runtime installé avant mise à jour du package.
+nouveau module. Le bundle enregistre le service avec les tags Symfony natifs
+`controller.service_arguments` et `routing.controller` ; le Back utilise déjà
+la ressource `routing.controllers` dans `config/routes.yaml`. Cette approche
+importe l'attribut `#[Route]` sans dépendance aux chemins `vendor/`, sans
+fichier de routes généré et sans routeur propriétaire. Les projets doivent
+installer la version de Core contenant cet enregistrement.
+
+Les tests Core vérifient le contrat JSON, les métadonnées `#[Route]` et
+les tags de la définition de service. Un test HTTP avec le Core `dev` réellement
+installé dans Back et le crash-test XT doivent encore confirmer la présence
+de `GET /api/health` dans le routeur et sa réponse, sans considérer ce seul
+point de liveness comme une vérification de disponibilité de la base.
+Pas de changement automatique du runtime installé avant mise à jour du package.
 
 ### Ajustement du contrat de test (19/11/2026)
 
