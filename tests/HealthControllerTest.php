@@ -19,7 +19,7 @@ final class HealthControllerTest extends TestCase
             ['data' => ['status' => 'ok']],
             json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR),
         );
-        self::assertSame('no-store', $response->headers->get('Cache-Control'));
+        self::assertStringContainsString('no-store', (string) $response->headers->get('Cache-Control'));
     }
 
     public function testExposesOnlyThePublicGetHealthRoute(): void
@@ -27,8 +27,9 @@ final class HealthControllerTest extends TestCase
         $method = new \ReflectionMethod(HealthController::class, '__invoke');
         $routes = $method->getAttributes(Route::class);
         self::assertCount(1, $routes);
-        $route = $routes[0]->newInstance();
-        self::assertSame('/api/health', $route->getPath());
-        self::assertSame(['GET'], $route->getMethods());
+        // Symfony's #[Route] is a metadata attribute, not a Routing\\Route instance.
+        $arguments = $routes[0]->getArguments();
+        self::assertSame('/api/health', $arguments[0]);
+        self::assertSame(['GET'], $arguments['methods']);
     }
 }

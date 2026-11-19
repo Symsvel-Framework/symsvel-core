@@ -36,3 +36,12 @@ Les tests Core portent sur le contrat JSON et la route ; l'activation réelle
 et les tests HTTP dans Back doivent suivre la disponibilité de cette version
 dans le package Composer du projet. Pas de changement automatique du
 runtime installé avant mise à jour du package.
+
+### Ajustement du contrat de test (19/11/2026)
+
+Les métadonnées `Symfony\\Component\\Routing\\Attribute\\Route`
+sont inspectées via les arguments de l'attribut PHP ; elles ne sont
+pas un objet `Symfony\\Component\\Routing\\Route` et n'exposent pas
+les getters de celui-ci. Le Cache-Control est validé par la présence
+de `no-store` : Symfony peut également y ajouter `private`, ce qui
+n'altère pas la sémantique anti-cache du point de liveness.
