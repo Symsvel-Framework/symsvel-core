@@ -1,15 +1,12 @@
 # Intégration continue
 
-La branche `dev` est le terrain de développement ; `main` conserve la version stable.
-
-Le workflow `.github/workflows/ci.yml` est déclenché par les `push` sur `dev` et `main`, ainsi que par les pull requests ciblant `main`. Les pull requests ciblant `dev` ne déclenchent pas de CI au titre de l'événement `pull_request` ; un `push` sur `dev` déclenche sa propre exécution. Les éventuels déclencheurs supplémentaires définis dans le workflow restent applicables.
-
-Les jobs utilisent les runners auto-hébergés configurés dans le workflow. Une modification n'est validée qu'après exécution et réussite de la CI, puis les crash-tests locaux requis.
+Depuis le 22 novembre 2026, la CI s'exécute sur GitHub-hosted Ubuntu 24.04 avec PHP 8.4 et Composer. Les runners privés sont réservés à Packages et Recipes. Le workflow active les tests PHP et PHPUnit ; les crash-tests restent des validations distinctes.
 
 ### Visibilité des tests ignorés
 
 La CI affiche les raisons des tests PHPUnit ignorés avec `--display-skipped` (directement ou via le script Composer QA). Un test ignoré ne devient pas bloquant pour autant : les motifs sont examinés pour distinguer prérequis absents et couverture manquante.
 
-## Release sur runners auto-hébergés (16/11/2026)
+## Publication (GitHub-hosted)
 
-Le workflow de tags `vX.Y.Z` utilise les labels CI existants `[self-hosted, linux, ARM64, symsvel]`, avec PHP 8.4 et Composer préinstallés. La publication reste une GitHub Release du tag vérifié via `actions/github-script@v7`, sans dépendance à l'exécutable `gh`. Aucun tag n'est créé par cette modification, l'autorisation `contents: write` demeure nécessaire. CI et création de release de validation restent requises ; un runner doit être en ligne et la plateforme autoriser l'exécution auto-hébergée.
+Le workflow de publication utilise Ubuntu 24.04 et PHP 8.4. Il valide les tags et crée les GitHub Releases. Aucune publication de test n'a été effectuée pendant la migration.
+
