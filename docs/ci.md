@@ -1,15 +1,14 @@
 # Intégration continue
 
-La branche `dev` est le terrain de développement ; `main` conserve la version stable.
+Depuis le 22/11/2026, la CI active `.github/workflows/ci.yml` est exécutée sur **GitHub-hosted Ubuntu 24.04**, avec PHP 8.4 installé par `shivammathur/setup-php@v2`, Composer et les tests existants. Les `push` vers `dev` et `main`, ainsi que les PR vers `main`, déclenchent la CI. `ci.yml.stub` reste une archive inactive.
 
-Le workflow `.github/workflows/ci.yml` est déclenché par les `push` sur `dev` et `main`, ainsi que par les pull requests ciblant `main`. Les pull requests ciblant `dev` ne déclenchent pas de CI au titre de l'événement `pull_request` ; un `push` sur `dev` déclenche sa propre exécution. Les éventuels déclencheurs supplémentaires définis dans le workflow restent applicables.
-
-Les jobs utilisent les runners auto-hébergés configurés dans le workflow. Une modification n'est validée qu'après exécution et réussite de la CI, puis les crash-tests locaux requis.
+Les runners du mainteneur ne servent plus ces dépôts publics : ils restent réservés à `symsvel-packages` et `symsvel-recipes` (privés). CI et crash-tests restent des validations distinctes.
 
 ### Visibilité des tests ignorés
 
 La CI affiche les raisons des tests PHPUnit ignorés avec `--display-skipped` (directement ou via le script Composer QA). Un test ignoré ne devient pas bloquant pour autant : les motifs sont examinés pour distinguer prérequis absents et couverture manquante.
 
-## Release sur runners auto-hébergés (16/11/2026)
+## Releases sur GitHub-hosted (22/11/2026)
 
-Le workflow de tags `vX.Y.Z` utilise les labels CI existants `[self-hosted, linux, ARM64, symsvel]`, avec PHP 8.4 et Composer préinstallés. La publication reste une GitHub Release du tag vérifié via `actions/github-script@v7`, sans dépendance à l'exécutable `gh`. Aucun tag n'est créé par cette modification, l'autorisation `contents: write` demeure nécessaire. CI et création de release de validation restent requises ; un runner doit être en ligne et la plateforme autoriser l'exécution auto-hébergée.
+`.github/workflows/release.yml` publie les tags `vX.Y.Z` via GitHub-hosted Ubuntu 24.04 (PHP 8.4 / Composer installés dans le workflow). Les contrôles existants, la vérification du tag et la création de la GitHub Release restent inchangés. Une publication réelle doit encore être vérifiée.
+
