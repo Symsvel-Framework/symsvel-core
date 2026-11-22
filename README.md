@@ -20,9 +20,12 @@ Voir [les responsabilités des composants](https://github.com/Symsvel-Framework/
 
 Cette description porte sur le code présent dans ce dépôt ; elle ne présume pas de futures extractions du Back.
 
-## CI locale et CI GitHub de référence (10/11/2026)
+## Intégration continue GitHub-hosted (22/11/2026)
 
-Le workflow actif `.github/workflows/ci.yml` s'exécute sur le runner d'organisation Docker ARM64 (`self-hosted`, `linux`, `ARM64`, `symsvel`). Il utilise PHP 8.4 et Composer déjà présents dans l'image, puis conserve la validation Composer, l'installation des dépendances, le lint PHP et PHPUnit. Le workflow GitHub-hosted d'origine (`ubuntu-24.04` et `shivammathur/setup-php@v2`) est sauvegardé, désactivé, dans `.github/workflows/ci.yml.stub` ; restaurer son contenu dans `ci.yml` pour revenir au runner GitHub. Ne pas activer les deux variantes simultanément pour préserver les minutes hébergées. L'exécution dépend de la disponibilité du Mac et de Docker ; ce runner persistant doit être réservé aux contributions de confiance. CI verte et crash-tests requis avant validation finale.
+Les workflows de ce dépôt public s'exécutent sur **GitHub-hosted Ubuntu 24.04**, avec les dépendances installées dans chaque job (plus de runner Docker local). Le workflow actif est `.github/workflows/ci.yml`. Composer, lint PHP et PHPUnit restent exécutés avec PHP 8.4. Les publications GitHub Release par tag exécutent aussi leurs workflows sur GitHub-hosted.
+
+Les runners auto-hébergés du mainteneur restent réservés à `symsvel-packages` et `symsvel-recipes` (privés). Les CI et les crash-tests locaux sont des validations distinctes.
+
 
 ## Liveness HTTP natif (19/11/2026)
 
