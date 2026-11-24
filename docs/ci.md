@@ -10,3 +10,7 @@ La CI affiche les raisons des tests PHPUnit ignorés avec `--display-skipped` (d
 
 Le workflow de publication utilise Ubuntu 24.04 et PHP 8.4. Il valide les tags et crée les GitHub Releases. Aucune publication de test n'a été effectuée pendant la migration.
 
+
+## Audit des dépendances
+
+Après résolution et installation Composer, `composer audit --locked` doit réussir sans exception dans la CI et dans la validation des releases qui installent les dépendances. PHPUnit doit être au minimum en 13.4.4. Un audit vert ne remplace ni les tests ni le CT.
