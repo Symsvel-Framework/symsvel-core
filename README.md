@@ -61,8 +61,6 @@ les getters de celui-ci. Le Cache-Control est validé par la présence
 de `no-store` : Symfony peut également y ajouter `private`, ce qui
 n'altère pas la sémantique anti-cache du point de liveness.
 
----
-
 ## Licence MIT et contributions
 
 Ce dépôt est distribué sous [licence MIT](LICENSE). Le code peut être utilisé, modifié et redistribué, y compris dans des projets commerciaux ou propriétaires, dans les conditions de cette licence (notamment la conservation de la notice de copyright et de licence).
