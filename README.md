@@ -1,5 +1,14 @@
 # SymSvel Core
 
+<!-- symsvel-brand:start -->
+<p align="center">
+  <a href="https://symsvel.com/"><img src="https://raw.githubusercontent.com/Symsvel-Framework/symsvel-tooling/07264829c404bcaecf1d8ce25c6a71e5beab2ae9/resources/documentation/theme/mark.png" alt="SymSvel Framework" width="48"></a>
+  &nbsp;&nbsp;
+  <a href="https://doc.symsvel.com/"><img src="https://raw.githubusercontent.com/Symsvel-Framework/symsvel-tooling/07264829c404bcaecf1d8ce25c6a71e5beab2ae9/resources/documentation/theme/zeko.webp" alt="Zeko, le gecko SymSvel" width="88"></a>
+</p>
+<p align="center"><a href="https://symsvel.com/">Site officiel</a> · <a href="https://doc.symsvel.com/">Documentation développeur</a></p>
+<!-- symsvel-brand:end -->
+
 Bundle Symfony de runtime technique : package Composer `symsvel-framework/core`.
 
 Le dépôt contient actuellement :
